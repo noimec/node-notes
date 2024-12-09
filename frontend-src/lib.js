@@ -1,7 +1,7 @@
 import _parseDate from "date-fns/parseISO";
 import _formatDate from "date-fns/format";
 
-import regexparam from "regexparam";
+const regexparam = require("regexparam");
 
 // routing
 

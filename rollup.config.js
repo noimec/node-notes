@@ -1,17 +1,16 @@
-/* eslint-disable node/no-unpublished-require */
-
 const svelte = require("rollup-plugin-svelte");
-const { default: resolve } = require("@rollup/plugin-node-resolve");
+const resolve = require("@rollup/plugin-node-resolve").default;
 const commonjs = require("@rollup/plugin-commonjs");
-const { babel } = require("@rollup/plugin-babel");
+const babel = require("@rollup/plugin-babel").babel;
 const livereload = require("rollup-plugin-livereload");
-const { terser } = require("rollup-plugin-terser");
+const terser = require("rollup-plugin-terser").terser;
 const css = require("rollup-plugin-css-only");
+const typescript = require("@rollup/plugin-typescript");
 
 const production = !process.env.ROLLUP_WATCH;
 
 module.exports = {
-  input: "frontend-src/main.js",
+  input: "frontend-src/main.ts",
   output: {
     sourcemap: true,
     format: "iife",
@@ -20,32 +19,21 @@ module.exports = {
   },
   plugins: [
     svelte({
-      compilerOptions: {
-        dev: !production,
-      },
+      compilerOptions: { dev: !production },
     }),
-
     css({ output: "bundle.css" }),
-
+    typescript({
+      tsconfig: "./tsconfig.json",
+      sourceMap: !production,
+    }),
     babel({
-      extensions: [".js", ".mjs", ".svelte"],
+      extensions: [".js", ".mjs", ".svelte", ".ts"],
       babelHelpers: "runtime",
       include: ["src/**", "node_modules/svelte/**"],
     }),
-
-    resolve({
-      browser: true,
-      dedupe: ["svelte"],
-    }),
-
+    resolve({ browser: true, dedupe: ["svelte"] }),
     commonjs(),
-
-    // Watch the `public` directory and refresh the
-    // browser on changes when not in production
     !production && livereload("public"),
-
-    // If we're building for production (npm run build
-    // instead of npm run dev), minify
     production && terser(),
   ],
   watch: {

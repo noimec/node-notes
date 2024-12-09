@@ -41,8 +41,7 @@
   const loadMore = () => {
     page += 1;
     return fetch();
-  };
-
+  };lang="ts"
   const fetchFromScratch = ({ resetNav = true } = {}) => {
     if (resetNav) {
       push("/");

@@ -1,9 +1,4 @@
-// Update with your config settings.
-
-/**
- * @type { Object.<string, import("knex").Knex.Config> }
- */
-export const development = {
+const config = {
   client: "pg",
   connection: {
     host: "127.0.0.1",
@@ -15,7 +10,5 @@ export const development = {
   migrations: {
     directory: "./migrations",
   },
-  // seeds: {
-  //   directory: './seeds',
-  // },
 };
+export default config;

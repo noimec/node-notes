@@ -1,11 +1,15 @@
 import App from "./App.svelte";
 
-const app = document.getElementById("main");
+function app() {
+  const main = document.getElementById("main");
 
-if (app) {
+  if (!main) {
+    throw new Error("Element with id 'main' not found.");
+  }
+
   new App({
-    target: app,
+    target: main,
   });
-} else {
-  console.error("Element with id 'main' not found.");
 }
+
+app()

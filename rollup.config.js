@@ -1,21 +1,28 @@
-const svelte = require("rollup-plugin-svelte");
-const resolve = require("@rollup/plugin-node-resolve").default;
-const commonjs = require("@rollup/plugin-commonjs");
-const babel = require("@rollup/plugin-babel").babel;
-const livereload = require("rollup-plugin-livereload");
-const terser = require("rollup-plugin-terser").terser;
-const css = require("rollup-plugin-css-only");
-const typescript = require("@rollup/plugin-typescript");
+import svelte from "rollup-plugin-svelte";
+import css from "rollup-plugin-css-only";
+import { terser } from "rollup-plugin-terser";
+import livereload from "rollup-plugin-livereload";
+
+import resolve from "@rollup/plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
+import { babel } from "@rollup/plugin-babel";
+import typescript from "@rollup/plugin-typescript";
 
 const production = !process.env.ROLLUP_WATCH;
 
-module.exports = {
+export default {
   input: "frontend-src/main.ts",
   output: {
     sourcemap: true,
     format: "iife",
     name: "app",
     file: "public/bundle.js",
+  },
+  onwarn(warning, warn) {
+    if (warning.code === "CIRCULAR_DEPENDENCY" && warning.importer.includes("node_modules/svelte")) {
+      return;
+    }
+    warn(warning);
   },
   plugins: [
     svelte({

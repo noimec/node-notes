@@ -6,7 +6,11 @@ import { User } from "../../domain";
 import { KnexPgUserRepository } from "../../infrastructure";
 
 export class AuthController {
-  constructor(private loginUser: LoginUser, private authService: AuthService, private userRepository: KnexPgUserRepository) { }
+  constructor(
+    private loginUser: LoginUser,
+    private authService: AuthService,
+    private userRepository: KnexPgUserRepository,
+  ) {}
 
   async register(req: Request, res: Response) {
     const { login, password } = req.body;

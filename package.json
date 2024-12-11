@@ -5,7 +5,6 @@
   "description": "",
   "keywords": [],
   "main": "index.ts",
-  "type": "module",
   "scripts": {
     "start": "node ts-node/esm ./src/index.ts",
     "dev": "nodemon -r tsx/register ./src/index.ts",

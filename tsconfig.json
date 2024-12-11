@@ -10,6 +10,16 @@
     "resolveJsonModule": true,
     "types": ["node"]
   },
-  "include": ["src/**/*.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/infrastructure/database/migrations/20241209113541_create_notes_table.js",
+    "src/infrastructure/database/migrations/20241209113541_create_notes_table.js",
+    "src/infrastructure/database/migrations/20241209113541_create_notes_table.js",
+    "src/infrastructure/database/migrations/20241209113541_create_notes_table.js",
+    "src/infrastructure/database/migrations/20241209113530_create_users_table.js",
+    "src/infrastructure/database/migrations/20241209113530_create_users_table.js",
+    "src/infrastructure/database/knexfile.js",
+    "src/infrastructure/database/knexfile.js"
+  ],
   "exclude": ["node_modules", "public"]
 }

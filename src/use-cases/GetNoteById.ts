@@ -1,7 +1,7 @@
-import { NoteRepository } from "../domain/interfaces/NoteRepository";
+import { KnexPgNoteRepository } from "../infrastructure/repositories/KnexPgNoteRepository";
 
 export class GetNoteById {
-  constructor(private noteRepository: NoteRepository) { }
+  constructor(private noteRepository: KnexPgNoteRepository) { }
 
   async execute(id: number) {
     return await this.noteRepository.findById(id)

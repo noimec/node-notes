@@ -4,6 +4,7 @@ export class Note {
     public header: string,
     public markdown: string,
     public createdAt: Date,
+    public updatedAt: Date,
     public archived: boolean,
     public userId: number
   ) { }

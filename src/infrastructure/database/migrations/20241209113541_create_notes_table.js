@@ -8,6 +8,7 @@ export function up(knex) {
     table.string("header").notNullable();
     table.text("markdown").notNullable();
     table.timestamp("created_at").defaultTo(knex.fn.now());
+    table.timestamp("updated_at").defaultTo(knex.fn.now());
     table.boolean("archived").defaultTo(false);
     table.integer("user_id").unsigned().references("id").inTable("users").onDelete("CASCADE");
   });

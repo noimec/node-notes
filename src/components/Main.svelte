@@ -1,6 +1,5 @@
 <script lang="ts">
   import Router, { link, location, push } from "svelte-spa-router";
-
   import { routerPrefix, routePatterns, getActiveNoteId } from "./lib";
   import { deleteAllArchived } from "./api";
   import { getNotes } from "./api";
@@ -25,7 +24,7 @@
   let page = 1;
   let entries = [];
 
-  const fetch = ({ reset = false } = {})=> {
+  const fetch = (p0: string, p1: { method: string; body: URLSearchParams; headers: { 'Content-Type': string; }; }, { reset = false } = {})=> {
     if (reset) {
       page = 1;
       entries = [];

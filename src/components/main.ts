@@ -6,7 +6,7 @@ function app() {
   if (!main) {
     throw new Error("Element with id 'main' not found.");
   }
-
+  console.log('asdasd')
   new App({
     target: main,
   });

@@ -10,7 +10,7 @@ export class AuthController {
     private loginUser: LoginUser,
     private authService: AuthService,
     private userRepository: KnexPgUserRepository,
-  ) {}
+  ) { }
 
   async register(req: Request, res: Response) {
     const { login, password } = req.body;
@@ -36,7 +36,7 @@ export class AuthController {
 
       res.json({ token });
     } catch (error) {
-      res.status(401).json({ message: error });
+      res.status(401).json({ message: error.message });
     }
   }
 }

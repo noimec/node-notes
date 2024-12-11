@@ -10,6 +10,6 @@
     "resolveJsonModule": true,
     "types": ["node"]
   },
-  "include": ["src/**/*.{ts, js}"],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "public"]
 }

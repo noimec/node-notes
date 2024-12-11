@@ -3,13 +3,13 @@
  * @returns { Promise<void> }
  */
 export function up(knex) {
-  return knex.schema.createTable("users", (table) => {
-    table.increments("id").primary();
-    table.string("login").notNullable().unique();
-    table.string("hash").notNullable();
-    table.timestamp("createdAt").defaultTo(knex.fn.now());
-    table.timestamp("updatedAt").defaultTo(knex.fn.now());
-  });
+  return knex.schema.createTable('users', (table) => {
+    table.increments('id').primary()
+    table.string('login').notNullable().unique()
+    table.string('hash').notNullable()
+    table.timestamp('createdAt').defaultTo(knex.fn.now())
+    table.timestamp('updatedAt').defaultTo(knex.fn.now())
+  })
 }
 
 /**
@@ -17,5 +17,5 @@ export function up(knex) {
  * @returns { Promise<void> }
  */
 export function down(knex) {
-  return knex.schema.dropTable("users");
+  return knex.schema.dropTable('users')
 }

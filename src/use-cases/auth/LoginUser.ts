@@ -1,21 +1,21 @@
-import { User, UserRepository } from "../../domain";
-import { AuthService } from "../../interface";
+import { User, UserRepository } from '../../domain'
+import { AuthService } from '../../interface'
 
 export class LoginUser {
   constructor(
     private userRepository: UserRepository,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   async execute(login: string, password: string): Promise<User | null> {
-    const user = await this.userRepository.findByLogin(login);
+    const user = await this.userRepository.findByLogin(login)
 
-    if (!user) throw new Error("User not found");
+    if (!user) throw new Error('User not found')
 
-    const isPasswordValid = await this.authService.verifyUserPassword(password, user.hash);
+    const isPasswordValid = await this.authService.verifyUserPassword(password, user.hash)
 
-    if (!isPasswordValid) throw new Error("Invalid password");
+    if (!isPasswordValid) throw new Error('Invalid password')
 
-    return user; // JWT
+    return user // JWT
   }
 }

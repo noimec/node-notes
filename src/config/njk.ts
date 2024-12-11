@@ -1,9 +1,9 @@
-import nunjucks from "nunjucks";
+import nunjucks from 'nunjucks'
 
-import type { Express } from "express";
+import type { Express } from 'express'
 
 export const njkConfig = (app: Express) =>
-  nunjucks.configure("src/views", {
+  nunjucks.configure('src/views', {
     autoescape: true,
     express: app,
-  });
+  })

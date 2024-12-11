@@ -1,42 +1,79 @@
-const PREFIX = "???";
+const PREFIX = 'https://example.com/api'
 
-const req = (url, options = {}) => {
-  const { body } = options;
+type RequestOptions = {
+  body?: any
+  headers?: Record<string, string>
+  method?: string
+}
 
-  return fetch((PREFIX + url).replace(/\/\/$/, ""), {
-    ...options,
-    body: body ? JSON.stringify(body) : null,
-    headers: {
-      ...options.headers,
-      ...(body
-        ? {
-            "Content-Type": "application/json",
-          }
-        : null),
-    },
-  }).then((res) =>
-    res.ok
-      ? res.json()
-      : res.text().then((message) => {
-          throw new Error(message);
-        }),
-  );
-};
+const req = async (url: string, options: RequestOptions = {}): Promise<any> => {
+  const { body } = options
 
-export const getNotes = ({ age, search, page } = {}) => {};
+  try {
+    const response = await fetch((PREFIX + url).replace(/\/\/$/, ''), {
+      ...options,
+      body: body ? JSON.stringify(body) : null,
+      headers: {
+        ...options.headers,
+        ...(body ? { 'Content-Type': 'application/json' } : {}),
+      },
+    })
 
-export const createNote = async (title, text) => {};
+    if (response.ok) {
+      return response.json()
+    } else {
+      const message = await response.text()
+      throw new Error(message)
+    }
+  } catch (error) {
+    throw new Error(`Network request failed: ${error.message}`)
+  }
+}
 
-export const getNote = (id) => {};
+type Note = {
+  id: string
+  title: string
+  text: string
+}
 
-export const archiveNote = {};
+export const getNotes = async ({ age, search, page }: { age: string; search: string; page: number }) => {
+  return req(`/notes?age=${age}&search=${search}&page=${page}`)
+}
 
-export const unarchiveNote = {};
+export const createNote = async (title: string, text: string): Promise<Note> => {
+  return req('/notes', {
+    method: 'POST',
+    body: { title, text },
+  })
+}
 
-export const editNote = (id, title, text) => {};
+export const getNote = async (id: string): Promise<Note> => {
+  return req(`/notes/${id}`)
+}
 
-export const deleteNote = (id) => {};
+export const archiveNote = async (id: string) => {
+  return req(`/notes/${id}/archive`, { method: 'POST' })
+}
 
-export const deleteAllArchived = () => {};
+export const unarchiveNote = async (id: string) => {
+  return req(`/notes/${id}/unarchive`, { method: 'POST' })
+}
 
-export const notePdfUrl = (id) => {};
+export const editNote = async (id: string, title: string, text: string): Promise<Note> => {
+  return req(`/notes/${id}`, {
+    method: 'PUT',
+    body: { title, text },
+  })
+}
+
+export const deleteNote = async (id: string) => {
+  return req(`/notes/${id}`, { method: 'DELETE' })
+}
+
+export const deleteAllArchived = async () => {
+  return req('/notes/archived', { method: 'DELETE' })
+}
+
+export const notePdfUrl = async (id: string): Promise<string> => {
+  return req(`/notes/${id}/pdf`)
+}

@@ -3,15 +3,15 @@
  * @returns { Promise<void> }
  */
 export function up(knex) {
-  return knex.schema.createTable("notes", (table) => {
-    table.increments("id").primary();
-    table.string("header").notNullable();
-    table.text("markdown").notNullable();
-    table.timestamp("createdAt").defaultTo(knex.fn.now());
-    table.timestamp("updatedAt").defaultTo(knex.fn.now());
-    table.boolean("archived").defaultTo(false);
-    table.integer("user_id").unsigned().references("id").inTable("users").onDelete("CASCADE");
-  });
+  return knex.schema.createTable('notes', (table) => {
+    table.increments('id').primary()
+    table.string('header').notNullable()
+    table.text('markdown').notNullable()
+    table.timestamp('createdAt').defaultTo(knex.fn.now())
+    table.timestamp('updatedAt').defaultTo(knex.fn.now())
+    table.boolean('archived').defaultTo(false)
+    table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
+  })
 }
 
 /**
@@ -19,5 +19,5 @@ export function up(knex) {
  * @returns { Promise<void> }
  */
 export function down(knex) {
-  return knex.schema.dropTable("notes");
+  return knex.schema.dropTable('notes')
 }

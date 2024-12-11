@@ -1,2 +1,2 @@
-export { KnexPgNoteRepository } from "./repositories/KnexPgNoteRepository";
-export { KnexPgUserRepository } from "./repositories/KnexPgUserRepository";
+export { KnexPgNoteRepository } from './repositories/KnexPgNoteRepository'
+export { KnexPgUserRepository } from './repositories/KnexPgUserRepository'

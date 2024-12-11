@@ -6,14 +6,14 @@ export class Note {
     public createdAt: Date,
     public updatedAt: Date,
     public archived: boolean,
-    public userId: number,
+    public userId: number
   ) {}
 
   archive() {
-    this.archived = true;
+    this.archived = true
   }
 
   restore() {
-    this.archived = false;
+    this.archived = false
   }
 }

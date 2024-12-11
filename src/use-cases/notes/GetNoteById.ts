@@ -1,4 +1,4 @@
-import { KnexPgNoteRepository } from "../infrastructure/repositories/KnexPgNoteRepository";
+import { KnexPgNoteRepository } from "../../infrastructure";
 
 export class GetNoteById {
   constructor(private noteRepository: KnexPgNoteRepository) { }

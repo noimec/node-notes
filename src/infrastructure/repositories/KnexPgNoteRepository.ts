@@ -1,7 +1,6 @@
 import knex from "knex";
 
-import { Note } from "../../domain/entities/Note";
-import { NoteRepository } from "../../domain/interfaces/NoteRepository";
+import { Note, NoteRepository } from "../../domain";
 
 export class KnexPgNoteRepository implements NoteRepository {
   async save(note: Note): Promise<void> {

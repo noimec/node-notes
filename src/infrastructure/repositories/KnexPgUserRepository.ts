@@ -1,7 +1,6 @@
 import knex from "knex";
-import { UserRepository } from "../../domain/interfaces/UserRepository";
-import { User } from "../../domain/entities/User";
 
+import { User, UserRepository } from "../../domain";
 
 export class KnexPgUserRepository implements UserRepository {
   create(user: User): Promise<void> {
@@ -10,5 +9,4 @@ export class KnexPgUserRepository implements UserRepository {
   findById(id: number): Promise<User> {
     throw new Error("Method not implemented.");
   }
-
 }

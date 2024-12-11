@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import nunjucks from 'nunjucks';
 
 import { njkConfig } from "./config/njk";
-import { noteRoutes } from "./interface/routes/noteRoutes";
+import { noteRoutes } from "./interface";
 
 class Server {
   app = express();

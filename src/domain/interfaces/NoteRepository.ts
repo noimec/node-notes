@@ -1,4 +1,4 @@
-import { Note } from "../entities/Note";
+import { Note } from "..";
 
 export interface NoteRepository {
   create(note: Note): Promise<void>;

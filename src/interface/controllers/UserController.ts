@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { GetUserById } from "../../use-cases/GetUserById";
 
+import { GetUserById } from "../../use-cases";
 
 interface UserRequestParams {
   id: string;

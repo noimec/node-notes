@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { GetNoteById } from "../../use-cases/GetNoteById";
+import { GetNoteById } from "../../use-cases";
 
 interface NoteRequestParams {
   id: string;

@@ -3,7 +3,7 @@ import knex from "knex";
 import { Note, NoteRepository } from "../../domain";
 
 export class KnexPgNoteRepository implements NoteRepository {
-  async save(note: Note): Promise<void> {
+  async create(note: Note): Promise<void> {
     await knex("notes").insert({
       id: note.id,
       header: note.header,
@@ -21,6 +21,7 @@ export class KnexPgNoteRepository implements NoteRepository {
       row.header,
       row.markdown,
       row.created_at,
+      row.updated_at,
       row.archived,
       row.user_id
     ));
@@ -34,6 +35,7 @@ export class KnexPgNoteRepository implements NoteRepository {
       row.header,
       row.markdown,
       row.created_at,
+      row.updated_at,
       row.archived,
       row.user_id
     );

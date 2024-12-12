@@ -27,8 +27,10 @@
   const fetch = async (
     p0: string = '',
     p1: { method: string; body: URLSearchParams; headers: { 'Content-Type': string } },
-    { reset = false }: { reset?: boolean } = {}
+    options?: { reset?: boolean }
   ) => {
+    const { reset = false } = options || {}
+
     if (reset) {
       page = 1
       entries = []

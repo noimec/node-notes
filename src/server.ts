@@ -5,11 +5,10 @@ import path from 'path'
 
 import { njkConfig } from './config/njk'
 import { authenticateToken, authRoutes, errorHandler, noteRoutes } from './interface'
-
+//authenticateToken
 class Server {
   app = express()
   port = process.env.PORT || 3000
-  //authenticateToken
   applyMiddleware() {
     this.app.use(express.static(path.join(__dirname, '..', 'public')))
     this.app.use(errorHandler)
@@ -21,9 +20,15 @@ class Server {
 
     this.app.use('/api', noteRoutes)
     this.app.use('/', authRoutes)
-    this.app.use('/dashboard', (req, res) => {
-      res.send(nunjucks.render('dashboard.njk', { user: (req as any).user }))
+
+    this.app.get('/dashboard', authenticateToken, (req, res) => {
+      res.json({ message: `Добро пожаловать, ${req.user.login}` });
     })
+
+    this.app.use('/dashboard', (req, res) => {
+      res.send(nunjucks.render('dashboard.njk', { user: req.user }));
+    })
+
     this.app.use('/', (req, res) => {
       res.send(nunjucks.render('index.njk'))
     })

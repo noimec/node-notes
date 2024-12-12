@@ -1,36 +1,30 @@
 import App from './App.svelte';
 
-async function app() {
-  try {
-    const data = await fetchWithAuth('http://localhost:3000/dashboard');
-    console.log('Данные успешно получены:', data);
+function app() {
+  const data = fetchWithAuth();
+  console.log('Данные успешно получены:', data);
 
-    const main = document.getElementById('main');
+  const main = document.getElementById('main');
 
-    if (!main) {
-      throw new Error("Element with id 'main' not found.");
-    }
-
-    new App({
-      target: main,
-    });
-  } catch (error) {
-    console.error('Ошибка при загрузке приложения:', error);
+  if (!main) {
+    throw new Error("Element with id 'main' not found.");
   }
+
+  new App({
+    target: main,
+  });
 }
 
 app();
 
-async function fetchWithAuth(url, options = {}) {
+async function fetchWithAuth() {
   const token = localStorage.getItem('token');
-  const headers = {
-    ...options.headers,
-    Authorization: `Bearer ${token}`,
-  };
 
-  const response = await fetch(url, {
-    ...options,
-    headers,
+  const response = await fetch('http://localhost:3000/dashboard', {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
   });
 
   if (!response.ok) {

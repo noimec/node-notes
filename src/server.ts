@@ -17,7 +17,7 @@ class Server {
 
     this.app.use(bodyParser.json())
 
-    this.app.use('/api', noteRoutes)
+    this.app.use('/note', noteRoutes)
     this.app.use('/', authRoutes)
 
     this.app.get('/dashboard', (req, res) => {
@@ -33,10 +33,10 @@ class Server {
     })
 
     this.app.use((req, res) => {
-      res.status(404).send(nunjucks.render('404.njk'));
+      res.status(404).send(nunjucks.render('404.njk'))
     })
 
-    this.app.use(errorHandler);
+    this.app.use(errorHandler)
   }
 
   start() {

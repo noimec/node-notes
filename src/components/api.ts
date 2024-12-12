@@ -1,4 +1,4 @@
-const PREFIX = 'https://example.com/api'
+const PREFIX = 'http://localhost:3000'
 
 type RequestOptions = {
   body?: any
@@ -8,6 +8,11 @@ type RequestOptions = {
 
 const req = async (url: string, options: RequestOptions = {}): Promise<any> => {
   const { body } = options
+  const token = localStorage.getItem('token')
+
+  if (!token) {
+    window.location.href = '/'
+  }
 
   try {
     const response = await fetch((PREFIX + url).replace(/\/\/$/, ''), {
@@ -15,6 +20,7 @@ const req = async (url: string, options: RequestOptions = {}): Promise<any> => {
       body: body ? JSON.stringify(body) : null,
       headers: {
         ...options.headers,
+        Authorization: `Bearer ${token}`,
         ...(body ? { 'Content-Type': 'application/json' } : {}),
       },
     })
@@ -31,7 +37,7 @@ const req = async (url: string, options: RequestOptions = {}): Promise<any> => {
 }
 
 type Note = {
-  id: string
+  id: number
   title: string
   text: string
 }
@@ -47,26 +53,26 @@ export const createNote = async (title: string, text: string): Promise<Note> => 
   })
 }
 
-export const getNote = async (id: string): Promise<Note> => {
+export const getNote = async (id: number): Promise<Note> => {
   return req(`/notes/${id}`)
 }
 
-export const archiveNote = async (id: string) => {
+export const archiveNote = async (id: number) => {
   return req(`/notes/${id}/archive`, { method: 'POST' })
 }
 
-export const unarchiveNote = async (id: string) => {
+export const unarchiveNote = async (id: number) => {
   return req(`/notes/${id}/unarchive`, { method: 'POST' })
 }
 
-export const editNote = async (id: string, title: string, text: string): Promise<Note> => {
+export const editNote = async (id: number, title: string, text: string): Promise<Note> => {
   return req(`/notes/${id}`, {
     method: 'PUT',
     body: { title, text },
   })
 }
 
-export const deleteNote = async (id: string) => {
+export const deleteNote = async (id: number) => {
   return req(`/notes/${id}`, { method: 'DELETE' })
 }
 
@@ -74,6 +80,6 @@ export const deleteAllArchived = async () => {
   return req('/notes/archived', { method: 'DELETE' })
 }
 
-export const notePdfUrl = async (id: string): Promise<string> => {
+export const notePdfUrl = async (id: number): Promise<string> => {
   return req(`/notes/${id}/pdf`)
 }

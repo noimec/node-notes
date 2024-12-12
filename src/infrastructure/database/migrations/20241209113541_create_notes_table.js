@@ -5,12 +5,12 @@
 export function up(knex) {
   return knex.schema.createTable('notes', (table) => {
     table.increments('id').primary()
-    table.string('header').notNullable()
-    table.text('markdown').notNullable()
+    table.string('title').notNullable()
+    table.text('text').notNullable()
     table.timestamp('createdAt').defaultTo(knex.fn.now())
     table.timestamp('updatedAt').defaultTo(knex.fn.now())
     table.boolean('archived').defaultTo(false)
-    table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
+    table.integer('userId').unsigned().references('id').inTable('users').onDelete('CASCADE')
   })
 }
 

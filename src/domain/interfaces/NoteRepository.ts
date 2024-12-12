@@ -1,9 +1,13 @@
-import { Note } from '..'
+import { NotePromise } from '..'
 
 export interface NoteRepository {
-  create(note: Note): Promise<void>
-  findByUserId(userId: number): Promise<Note[]>
-  findById(noteId: number): Promise<Note | null>
-  update(note: Note): Promise<void>
-  delete(noteId: number): Promise<void>
+  getNotes(params: { age: string; search: string; page: number }, userId: number): Promise<NotePromise[]>
+  createNote(title: string, text: string, userId: number): Promise<NotePromise>
+  getNote(id: number): Promise<NotePromise>
+  archiveNote(id: number): Promise<void>
+  unarchiveNote(id: number): Promise<void>
+  editNote(id: number, title: string, text: string): Promise<NotePromise>
+  deleteNote(id: number): Promise<void>
+  deleteAllArchived(userId: number): Promise<void>
+  notePdfUrl(id: number): Promise<string>
 }

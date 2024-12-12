@@ -1,6 +1,6 @@
 import { parseISO } from 'date-fns/parseISO'
 import { format } from 'date-fns/format'
-import { parse, inject } from 'regexparam'
+import { parse } from 'regexparam'
 
 // routing
 export const routePatterns = {

@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken'
+import { Request, Response } from 'express';
 
 import { AuthService } from '..'
 import { LoginUser } from '../../use-cases'
-import { User } from '../../domain'
 import { KnexPgUserRepository } from '../../infrastructure'
 
 export class AuthController {
@@ -10,14 +10,14 @@ export class AuthController {
     private loginUser: LoginUser,
     private authService: AuthService,
     private userRepository: KnexPgUserRepository
-  ) {}
+  ) { }
 
   async register(req: Request, res: Response) {
     const { login, password } = req.body
 
     const hash = await this.authService.hashPassword(password)
-    const user = new User(0, login, hash, new Date(), new Date())
-    await this.userRepository.create(user)
+    const newUser = { createdAt: new Date(), hash: hash, login: login, updatedAt: new Date() }
+    await this.userRepository.create(newUser)
 
     res.json({ message: 'User registered successfully' })
   }
@@ -36,7 +36,7 @@ export class AuthController {
 
       res.json({ token })
     } catch (error) {
-      res.status(401).json({ message: error.message })
+      res.status(401).json({ error })
     }
   }
 }

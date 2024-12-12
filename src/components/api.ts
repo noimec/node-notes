@@ -26,7 +26,7 @@ const req = async (url: string, options: RequestOptions = {}): Promise<any> => {
       throw new Error(message)
     }
   } catch (error) {
-    throw new Error(`Network request failed: ${error.message}`)
+    throw new Error(`Network request failed: ${error}`)
   }
 }
 

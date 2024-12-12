@@ -1,14 +1,30 @@
 import jwt from 'jsonwebtoken'
 import { Request, Response, NextFunction } from 'express'
 
-export function authenticateToken(req: Request, res: Response, next: NextFunction) {
+interface DecodedToken {
+  id: string;
+  role: string;
+}
+
+declare module 'express-serve-static-core' {
+  interface Request {
+    user?: DecodedToken;
+  }
+}
+
+export function authenticateToken(req: Request, res: Response, next: NextFunction): void {
   const token = req.header('Authorization')?.split(' ')[1];
-  if (!token) return res.status(401).json({ message: 'Токен отсутствует' });
 
-  jwt.verify(token, process.env.JWT_SECRET || 'secret' as string, (err, decoded) => {
-    if (err) return res.status(403).json({ message: 'Токен недействителен' });
+  if (!token) {
+    res.status(401).json({ message: 'No token' });
+    return
+  }
 
-    req.user = decoded as { id: number; login: string };
+  jwt.verify(token, process.env.JWT_SECRET || 'secret', (err, decoded) => {
+    if (err) return res.status(403).json({ message: 'Invalid token' });
+
+    req.user = decoded as DecodedToken;
+
     next();
   });
 }

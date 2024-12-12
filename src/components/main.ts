@@ -1,8 +1,7 @@
 import App from './App.svelte';
 
-function app() {
-  const data = fetchWithAuth();
-  console.log('Данные успешно получены:', data);
+async function app() {
+  const data = await fetchWithAuth();
 
   const main = document.getElementById('main');
 
@@ -20,20 +19,27 @@ app();
 async function fetchWithAuth() {
   const token = localStorage.getItem('token');
 
-  const response = await fetch('http://localhost:3000/dashboard', {
+  if (!token) {
+    window.location.href = '/';
+  }
+
+  const response = await fetch('http://localhost:3000/dashboard/auth', {
     method: 'GET',
     headers: {
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`
     },
   });
 
   if (!response.ok) {
     if (response.status === 401) {
-      alert('Авторизация не пройдена. Пожалуйста, войдите снова.');
+      alert('Authorization failed. Please login again.');
+
       localStorage.removeItem('token');
-      window.location.href = '/login';
+
+      window.location.href = '/';
     } else if (response.status === 403) {
-      alert('У вас нет доступа к этому ресурсу.');
+      alert('You do not have access to this resource.');
     }
   }
 

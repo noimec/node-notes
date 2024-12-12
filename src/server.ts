@@ -12,8 +12,6 @@ class Server {
   applyMiddleware() {
     this.app.use(express.static(path.join(__dirname, '..', 'public')))
 
-    this.app.use(errorHandler)
-
     njkConfig(this.app)
     this.app.set('view engine', 'njk')
 
@@ -22,8 +20,12 @@ class Server {
     this.app.use('/api', noteRoutes)
     this.app.use('/', authRoutes)
 
-    this.app.get('/dashboard', authenticateToken, (req, res) => {
-      res.json({ message: `Добро пожаловать, ${req.user.login}` })
+    this.app.get('/dashboard', (req, res) => {
+      res.send(nunjucks.render('dashboard.njk'))
+    })
+
+    this.app.get('/dashboard/auth', authenticateToken, (req, res) => {
+      res.send({ user: req.user })
     })
 
     this.app.get('/', (req, res) => {
@@ -33,6 +35,8 @@ class Server {
     this.app.use((req, res) => {
       res.status(404).send(nunjucks.render('404.njk'));
     })
+
+    this.app.use(errorHandler);
   }
 
   start() {

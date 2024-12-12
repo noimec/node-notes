@@ -2,9 +2,8 @@ import { User, UserRepository } from '../../domain'
 import { db } from '../database'
 
 export class KnexPgUserRepository implements UserRepository {
-  async create(user: User): Promise<void> {
+  async create(user: Omit<User, 'id'>): Promise<void> {
     await db('users').insert({
-      id: user.id,
       login: user.login,
       hash: user.hash,
       createdAt: user.createdAt,

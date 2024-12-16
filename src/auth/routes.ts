@@ -1,9 +1,6 @@
 import { Router } from 'express'
 
-import { AuthController } from '../controllers/AuthController'
-import { LoginUser } from '../../use-cases'
-import { AuthService } from '..'
-import { KnexPgUserRepository } from '../../infrastructure'
+import { AuthController } from './controller'
 
 export const authRoutes = Router()
 

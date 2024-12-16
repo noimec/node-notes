@@ -17,7 +17,7 @@ class Server {
 
     this.app.use(bodyParser.json())
 
-    this.app.use('/note', noteRoutes)
+    this.app.use('/notes', noteRoutes)
     this.app.use('/', authRoutes)
 
     this.app.get('/dashboard', (req, res) => {

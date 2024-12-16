@@ -7,7 +7,7 @@ interface UserRequestParams {
 }
 
 export class UserController {
-  constructor(private getNoteById: GetUserById) {}
+  constructor(private getNoteById: GetUserById) { }
 
   async getUser(req: Request<UserRequestParams>, res: Response) {
     const id = parseInt(req.params.id, 10)

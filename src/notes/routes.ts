@@ -1,8 +1,5 @@
 import { Router } from 'express'
 
-import { KnexPgNoteRepository } from '../../infrastructure'
-import { GetNoteById } from '../../use-cases'
-import { NoteController } from '../controllers/NoteController'
 
 export const noteRoutes = Router()
 

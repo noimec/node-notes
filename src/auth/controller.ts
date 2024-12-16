@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken'
 import { Request, Response } from 'express'
 
-import { AuthService } from '..'
-import { LoginUser } from '../../use-cases'
+import { AuthService } from '../interface'
+import { LoginUser } from '../use-cases'
 import { KnexPgUserRepository } from '../../infrastructure'
 
 export class AuthController {
@@ -10,7 +10,7 @@ export class AuthController {
     private loginUser: LoginUser,
     private authService: AuthService,
     private userRepository: KnexPgUserRepository
-  ) {}
+  ) { }
 
   async register(req: Request, res: Response) {
     const { login, password } = req.body

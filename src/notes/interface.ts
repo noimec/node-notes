@@ -1,4 +1,3 @@
-import { NotePromise } from '..'
 
 export interface NoteRepository {
   getNotes(params: { age: string; search: string; page: number }, userId: number): Promise<NotePromise[]>

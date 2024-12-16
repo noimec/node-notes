@@ -5,7 +5,7 @@ export class LoginUser {
   constructor(
     private userRepository: UserRepository,
     private authService: AuthService
-  ) {}
+  ) { }
 
   async execute(login: string, password: string): Promise<User | null> {
     const user = await this.userRepository.findByLogin(login)

@@ -1,5 +1,3 @@
-import { NewNote, Note, NotePromise, NoteRepository } from '../../domain'
-import { db } from '../database'
 
 export class KnexPgNoteRepository implements NoteRepository {
   async getNotes(params: { age: string; search: string; page: number }, userId: number): Promise<NotePromise[]> {

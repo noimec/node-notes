@@ -8,6 +8,6 @@ module.exports = {
     database: 'postgres',
   },
   migrations: {
-    directory: './migrations',
+    directory: '../migrations',
   },
 }

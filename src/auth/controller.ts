@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken'
 import { Request, Response } from 'express'
 
-import { AuthService } from '../interface'
-import { LoginUser } from '../use-cases'
-import { KnexPgUserRepository } from '../../infrastructure'
+import { KnexPgUserRepository } from '../users/repository'
+import { LoginUser } from './service'
+import { AuthService } from './service1'
 
 export class AuthController {
   constructor(

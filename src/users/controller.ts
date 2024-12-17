@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 
-import { GetUserById } from '../../use-cases'
+import { GetUserById } from './service'
 
 interface UserRequestParams {
   id: string

@@ -16,7 +16,7 @@ export default {
     sourcemap: true,
     format: 'iife',
     name: 'app',
-    file: 'public/bundle.js',
+    file: 'dist/bundle.js',
   },
   onwarn(warning, warn) {
     if (warning.code === 'CIRCULAR_DEPENDENCY' && warning.importer.includes('node_modules/svelte')) {
@@ -40,7 +40,7 @@ export default {
     }),
     resolve({ browser: true, dedupe: ['svelte'] }),
     commonjs(),
-    !production && livereload('public'),
+    !production && livereload('dist'),
     production && terser(),
   ],
   watch: {

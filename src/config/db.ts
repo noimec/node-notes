@@ -10,6 +10,6 @@ export const db = knex({
     database: 'postgres',
   },
   migrations: {
-    directory: './migrations',
+    directory: '../migrations',
   },
 })

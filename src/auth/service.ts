@@ -1,5 +1,6 @@
-import { User, UserRepository } from '../../domain'
-import { AuthService } from '../../interface'
+import { User } from "../users/entity"
+import { UserRepository } from "../users/interface"
+import { AuthService } from "./service1"
 
 export class LoginUser {
   constructor(

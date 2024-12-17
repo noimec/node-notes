@@ -1,3 +1,7 @@
+import { db } from "../config/db";
+
+import { NewNote, Note, NotePromise } from "./entity";
+import { NoteRepository } from "./interface";
 
 export class KnexPgNoteRepository implements NoteRepository {
   async getNotes(params: { age: string; search: string; page: number }, userId: number): Promise<NotePromise[]> {

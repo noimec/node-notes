@@ -1,8 +1,8 @@
 import { Router } from 'express'
 
-import { KnexPgUserRepository } from '../../infrastructure'
-import { GetUserById } from '../../use-cases'
-import { UserController } from '..'
+import { KnexPgUserRepository } from './repository'
+import { GetUserById } from './service'
+import { UserController } from './controller'
 
 export const userRoutes = Router()
 

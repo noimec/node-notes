@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 
+import { GetNoteById } from './service'
 
 interface NoteRequestParams {
   id: string

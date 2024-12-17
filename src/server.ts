@@ -4,7 +4,10 @@ import nunjucks from 'nunjucks'
 import path from 'path'
 
 import { njkConfig } from './config/njk'
-import { authenticateToken, authRoutes, errorHandler, noteRoutes } from './interface'
+import { authRoutes } from './auth/routes'
+import { authenticateToken } from './middleware/authToken'
+import { errorHandler } from './middleware/errorHandler'
+import { noteRoutes } from './notes/routes'
 
 class Server {
   app = express()

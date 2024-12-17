@@ -1,5 +1,7 @@
-import { User, UserRepository } from '../../domain'
-import { db } from '../database'
+import { db } from "../config/db"
+
+import { User } from "./entity"
+import { UserRepository } from "./interface"
 
 export class KnexPgUserRepository implements UserRepository {
   async create(user: Omit<User, 'id'>): Promise<void> {

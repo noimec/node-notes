@@ -1,4 +1,4 @@
-import { KnexPgUserRepository } from '../../infrastructure'
+import { KnexPgUserRepository } from "./repository";
 
 export class GetUserById {
   constructor(private userRepository: KnexPgUserRepository) { }
